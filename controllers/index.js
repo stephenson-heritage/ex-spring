@@ -23,8 +23,9 @@ async function routePage(req, res, next) {
     next();
   }
   const menuData = await menuModel.getMenu("main");
+  const sideData = await menuModel.getMenu("side");
   //console.log(menuData);
-  res.render('index', { title: pageData.title, page: pageData, mainMenu: menuData });
+  res.render('index', { title: pageData.title, page: pageData, mainMenu: menuData, sideMenu: sideData });
 }
 
 module.exports = router;
