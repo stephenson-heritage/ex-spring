@@ -7,9 +7,15 @@ module.exports = {
             [
                 pageKey
             ]);
-        let data = rows[0];
-        connection.end();
 
-        return data;
+        if (rows[0] === undefined) {
+            //todo load home page or return []
+            return undefined;
+        } else {
+            let data = rows[0];
+            connection.end();
+
+            return data;
+        }
     }
 }
