@@ -4,11 +4,11 @@ const db = require('../config/db');
 const pageModel = require('../models/page');
 const menuModel = require('../models/menu');
 /* GET home page. */
-router.get('/', async function (req, res, next) {
+router.all('/', async function (req, res, next) {
   routePage(req, res, next);
 });
 
-router.get('/:pageKey', async function (req, res, next) {
+router.all('/:pageKey', async function (req, res, next) {
   routePage(req, res, next);
 });
 
@@ -18,14 +18,14 @@ async function routePage(req, res, next) {
     req.params.pageKey = "home";
   }
   const pageData = await pageModel.getPage(req.params.pageKey);
-
   if (pageData === undefined) {
     next();
+  } else {
+    const menuData = await menuModel.getMenu("main");
+    const sideData = await menuModel.getMenu("side");
+    //console.log(pageData);
+    res.render('index', { title: pageData.title, page: pageData, mainMenu: menuData, sideMenu: sideData, auth: req.auth });
   }
-  const menuData = await menuModel.getMenu("main");
-  const sideData = await menuModel.getMenu("side");
-  //console.log(menuData);
-  res.render('index', { title: pageData.title, page: pageData, mainMenu: menuData, sideMenu: sideData });
 }
 
 module.exports = router;
