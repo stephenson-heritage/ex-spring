@@ -7,7 +7,7 @@ const db = require("./config/db");
 const hbs = require('hbs');
 const login = require('./middleware/login');
 
-const indexRouter = require('./controllers/index');
+const indexRouter = require('./controllers/page');
 
 const app = express();
 

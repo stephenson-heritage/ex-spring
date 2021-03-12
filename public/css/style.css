@@ -73,6 +73,10 @@ main {
     vertical-align: top;
 }
 
+main>form textarea {
+    width: 99%;
+}
+
 aside {
     background-color: #2ddbd3;
     box-sizing: border-box;

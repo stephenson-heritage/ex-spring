@@ -7,8 +7,15 @@ module.exports = {
             [
                 menuName
             ]);
+
+
         let data = rows;
         connection.end();
-        return data;
+
+        if (rows.length > 0) {
+            return data;
+        } else {
+            return false;
+        }
     }
 }
