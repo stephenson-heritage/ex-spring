@@ -8,6 +8,6 @@ const menuModel = require('../models/menu');
 
 /* blog listing  */
 router.all('/', async function (req, res, next) {
-    res.send("blog");
+    res.send("blogenty");
 });
 module.exports = router;
