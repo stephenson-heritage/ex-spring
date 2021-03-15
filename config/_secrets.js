@@ -1,6 +1,6 @@
 module.exports = {
     database: {
-        host: 'host',
+        host: 'localhost',
         user: 'user',
         password: 'password',
         connectionLimit: 5,
