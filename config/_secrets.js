@@ -4,6 +4,6 @@ module.exports = {
         user: 'user',
         password: 'password',
         connectionLimit: 5,
-        database: 'database'
+        database: 'express_spring'
     }
 }
