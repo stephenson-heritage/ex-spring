@@ -8,7 +8,7 @@ const hbs = require('hbs');
 const login = require('./middleware/login');
 
 const indexRouter = require('./controllers/page');
-
+const blogRouter = require('./controllers/blog');
 const app = express();
 
 
@@ -27,7 +27,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(login);
-
+app.use('/blog/', blogRouter);
 app.use('/', indexRouter);
 
 

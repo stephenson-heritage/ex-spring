@@ -4,6 +4,9 @@ const db = require('../config/db');
 const pageModel = require('../models/page');
 const menuModel = require('../models/menu');
 const e = require('express');
+
+
+
 /* GET/POST home page. */
 router.all('/', async function (req, res, next) {
   routePage(req, res, next);
