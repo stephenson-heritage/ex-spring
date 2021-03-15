@@ -19,6 +19,19 @@ body {
     background-size: cover;
 }
 
+.blog .user {
+    background-color: #4FE096;
+}
+
+.blog>.entry {
+    border-bottom: solid 3px #bbb;
+}
+
+.blog h2 {
+    margin: 2px;
+    font-size: 1.2em;
+}
+
 aside>ul {
     margin-bottom: 0;
 }
