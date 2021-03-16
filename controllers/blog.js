@@ -3,6 +3,7 @@ const router = express.Router();
 const db = require('../config/db');
 const menuModel = require('../models/menu');
 const blogModel = require('../models/blog');
+const blog = require('../models/blog');
 
 
 router.get('/add', async function (req, res, next) {
@@ -34,11 +35,19 @@ router.post('/add', async function (req, res, next) {
         next();
     }
 });
-
-/* blog listing  */
-router.all('/', async function (req, res, next) {
+async function blogPage(req, res, next) {
+    if (req.params.start === undefined) {
+        req.params.start = 0;
+    }
     const menuData = await menuModel.getMenu("main");
-    const blogData = await blogModel.getEntries();
+    const blogData = await blogModel.getEntries(req.params.start, 3);
+    let entries = [];
+    for (let i = 0; i <= Math.floor(blogData.rowCount / 3); i++) {
+        entries[i] = { start: i, page: i + 1 };
+        console.log(i)
+    }
+    blogData.entries = entries;
+    console.log(blogData.entries);
     res.render("blog/list",
         {
             title: "Blog",
@@ -46,6 +55,13 @@ router.all('/', async function (req, res, next) {
             blogEntries: blogData,
             auth: req.auth,
         });
+}
+router.all('/:start', async function (req, res, next) {
+    blogPage(req, res, next);
+});
+/* blog listing  */
+router.all('/', async function (req, res, next) {
+    blogPage(req, res, next);
 });
 module.exports = router;
 

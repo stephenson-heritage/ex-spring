@@ -2,12 +2,14 @@
 <a href="blog/add">Add Entry</a>
 {{/if}}
 <div class="blog">
-    {{#each blogEntries}}
+    {{#each blogEntries.rows}}
     <div class="entry">
         <h2>{{title}}</h2>
         <div class="user">{{username}}</div>
         <div class="content">{{{content}}}</div>
     </div>
     {{/each}}
-
+    {{#each blogEntries.entries}}
+    <a href="/blog/{{start}}">{{page}}</a>
+    {{/each}}
 </div>
