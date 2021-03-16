@@ -9,6 +9,25 @@ DROP DATABASE IF EXISTS `express_spring`;
 CREATE DATABASE IF NOT EXISTS `express_spring` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
 USE `express_spring`;
 
+DROP TABLE IF EXISTS `blog`;
+CREATE TABLE IF NOT EXISTS `blog` (
+  `blogId` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(100) NOT NULL DEFAULT '0',
+  `userId` int(11) unsigned NOT NULL DEFAULT 0,
+  `content` text NOT NULL,
+  `dateAdded` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (`blogId`),
+  KEY `FK_blog_user` (`userId`),
+  CONSTRAINT `FK_blog_user` FOREIGN KEY (`userId`) REFERENCES `user` (`userID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+DELETE FROM `blog`;
+/*!40000 ALTER TABLE `blog` DISABLE KEYS */;
+INSERT INTO `blog` (`blogId`, `title`, `userId`, `content`, `dateAdded`) VALUES
+	(1, 'test 1', 8, '<strong>test</strong', '2021-03-15 11:38:04'),
+	(2, 'test 2', 1, 'test', '2021-03-15 11:38:21');
+/*!40000 ALTER TABLE `blog` ENABLE KEYS */;
+
 DROP TABLE IF EXISTS `image`;
 CREATE TABLE IF NOT EXISTS `image` (
   `imageID` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -65,11 +84,9 @@ DELETE FROM `menuitem`;
 /*!40000 ALTER TABLE `menuitem` DISABLE KEYS */;
 INSERT INTO `menuitem` (`menuItemID`, `menuID`, `html`, `link`, `target`, `sort`, `dateModified`) VALUES
 	(1, 1, 'Home', 'home', '_self', 0, '2021-03-10 10:28:16'),
-	(2, 1, 'Contact Us', 'contact', '_self', 0, '2021-03-10 10:28:23'),
+	(2, 1, 'Contact Us', 'contact', '_self', 2, '2021-03-15 12:09:53'),
 	(3, 2, 'Copyright Policy', 'copyright', '_self', -1, '2021-03-12 09:11:45'),
-	(4, 3, 'Google!', 'http://www.google.ca', '_blank', 1, '2021-03-12 09:10:14'),
-	(5, 1, 'Upload Image', 'upload', '_self', 1, '2021-03-10 10:28:54'),
-	(6, 1, 'Gallery', 'gallery', '_self', -1, '2021-03-10 10:28:50');
+	(7, 1, 'Blog', 'blog', '_self', 1, '2021-03-15 12:09:49');
 /*!40000 ALTER TABLE `menuitem` ENABLE KEYS */;
 
 DROP TABLE IF EXISTS `page`;
@@ -112,9 +129,9 @@ CREATE TABLE IF NOT EXISTS `user` (
 DELETE FROM `user`;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 INSERT INTO `user` (`userID`, `username`, `passHash`, `cookieHash`, `dateModified`) VALUES
-	(1, 'bob', 'pmWkWSBCL51Bfkhn79xPuKBKHz//H6B+mY6G9/eieuM=', 'mDMc6Q158tpuW5+vn+ZFoosNap0VrO+Q30EMyl5ntn0=', '2021-03-11 11:32:12'),
+	(1, 'bob', 'pmWkWSBCL51Bfkhn79xPuKBKHz//H6B+mY6G9/eieuM=', 'Yf81+XZHvmkcyKuXmK4fntn/rp5fZp8uBjQ3nqRtH0s=', '2021-03-15 09:28:46'),
 	(6, 'fhfgy', '550bd0e77e819081c9aa89043382aee9cb341730', '89553c275a3c947762ec7354d19b04eecb41e71c', '2021-02-24 09:08:29'),
-	(8, 'luke', 'zM9S89A8UHLuZKE290/FayfgTxX/5dHSd9WKsY2Usyc=', '0FNl9MUv1/vDZwPrtFUIMCJ/1P/Z4ektuU5e7l5vMUI=', '2021-03-12 09:16:44');
+	(8, 'luke', 'zM9S89A8UHLuZKE290/FayfgTxX/5dHSd9WKsY2Usyc=', 'CWi8YE4eQaGFSSsc8hiONOz4ecViXr/NFMKGpNcKF60=', '2021-03-15 12:10:21');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
