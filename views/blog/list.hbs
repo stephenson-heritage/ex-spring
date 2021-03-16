@@ -1,3 +1,6 @@
+{{#if auth.loggedIn}}
+<a href="blog/add">Add Entry</a>
+{{/if}}
 <div class="blog">
     {{#each blogEntries}}
     <div class="entry">

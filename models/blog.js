@@ -1,6 +1,26 @@
 const db = require('../config/db');
 
+
 module.exports = {
+    addEntry: async function (userID, entry) {
+        let connection = await db.getConnection();
+        //SELECT `blogId`, `title`, `userId`, `content`, `dateAdded` FROM `express_spring`.`blog` ORDER BY `dateAdded` LIMIT 5
+
+        const rows = await connection.query("INSERT INTO `express_spring`.`blog` (`title`, `userId`, `content`) VALUES (?, ?, ?)",
+            [
+                entry.title, userID, entry.content
+            ]);
+
+
+        let data = rows;
+        connection.end();
+
+        if (rows.length > 0) {
+            return data;
+        } else {
+            return false;
+        }
+    },
     getEntries: async function () {
         let connection = await db.getConnection();
         //SELECT `blogId`, `title`, `userId`, `content`, `dateAdded` FROM `express_spring`.`blog` ORDER BY `dateAdded` LIMIT 5
