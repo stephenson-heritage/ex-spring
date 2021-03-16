@@ -3,7 +3,7 @@ const router = express.Router();
 const db = require('../config/db');
 const menuModel = require('../models/menu');
 const blogModel = require('../models/blog');
-const blog = require('../models/blog');
+
 
 
 router.get('/add', async function (req, res, next) {

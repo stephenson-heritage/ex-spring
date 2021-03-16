@@ -9,6 +9,7 @@ const login = require('./middleware/login');
 
 const indexRouter = require('./controllers/page');
 const blogRouter = require('./controllers/blog');
+const apiRouter = require('./controllers/api');
 const app = express();
 
 
@@ -27,6 +28,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(login);
+app.use('/api/', apiRouter);
 app.use('/blog/', blogRouter);
 app.use('/', indexRouter);
 
